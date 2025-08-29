@@ -1,1 +1,48 @@
-// U can , Just try Yorself
+// Connect 3 led red yellow and green which should be looped again and again until a switch is on , if the switch is on then the should be 4 the switch with should blink 
+// Consider this a traffic system and the 4th  light is light for pedestrian and during that time the red light should on 
+
+
+
+int red = 2;
+int yellow = 3;
+int green = 4;
+int pedestrian = 5;   // Pedestrian light
+int switchPin = 6;    // Switch pin
+
+void setup() {
+  pinMode(red, OUTPUT);
+  pinMode(yellow, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(pedestrian, OUTPUT);
+  pinMode(switchPin, INPUT);
+}
+
+void loop() {
+  if (digitalRead(switchPin) == HIGH) {
+    // Pedestrian mode
+    digitalWrite(red, HIGH);      // Red ON during pedestrian crossing
+    digitalWrite(yellow, LOW);
+    digitalWrite(green, LOW);
+
+    // Blink pedestrian light 5 times
+    for (int i = 0; i < 5; i++) {
+      digitalWrite(pedestrian, HIGH);
+      delay(500);
+      digitalWrite(pedestrian, LOW);
+      delay(500);
+    }
+  } else {
+    // Normal traffic cycle
+    digitalWrite(red, HIGH);
+    delay(3000);
+    digitalWrite(red, LOW);
+
+    digitalWrite(yellow, HIGH);
+    delay(1000);
+    digitalWrite(yellow, LOW);
+
+    digitalWrite(green, HIGH);
+    delay(3000);
+    digitalWrite(green, LOW);
+  }
+}
